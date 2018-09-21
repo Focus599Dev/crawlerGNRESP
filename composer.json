@@ -1,0 +1,15 @@
+{
+    "name": "root/crawler-gnre",
+    "description": "Crawler GNRE SP",
+    "type": "thiagoalessio/tesseract_ocr",
+    "require": {
+        "thiagoalessio/tesseract_ocr": "^2.6"
+    },
+    "authors": [
+        {
+            "name": "Marlon Barbosa",
+            "email": "marlon.academi@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}
