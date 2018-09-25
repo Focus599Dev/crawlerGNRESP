@@ -1,6 +1,10 @@
 <?php 
 
+namespace Focus599Dev\Crawler;
+
 use AntiCaptcha\ImageToText;
+use DOMDocument;
+use DomXpath;
 
 class Crawler{
 
@@ -94,8 +98,8 @@ class Crawler{
 		$path = $this->getCaptcha($this->html);
 
 		if (!$path){
-			
-	        // $this->logChaveError( $this->data['cnpj'] , 'Não foi possivel achar a imagem do captch');
+
+	        $this->logError('Não foi possivel achar a imagem do captch');
 
 			return false;
 		}
@@ -296,35 +300,50 @@ class Crawler{
 	}
 
 	private function execCurl($url, $method, $data, $certificado = null, $fallowLocation = true){
-		$ch = curl_init();
-
-		curl_setopt($ch, CURLOPT_URL, $url);
-
-		if ($method == 'POST')
-			curl_setopt($ch, CURLOPT_POST, true);
-
-		if ($data)
-			curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
-
-		if ($fallowLocation)
-			curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-		curl_setopt($ch, CURLOPT_HTTPHEADER, $this->header);
-
-		curl_setopt($ch, CURLOPT_COOKIEJAR, "cookie.txt");
 		
-		curl_setopt($ch, CURLOPT_COOKIEFILE, "cookie.txt"); //saved cookies
+		$httpcode = null;
 
-		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-        
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+		$response = null;
 
-		$response = curl_exec($ch);
+		try{
 
-		curl_close($ch);
+			$ch = curl_init();
 
+			curl_setopt($ch, CURLOPT_URL, $url);
+
+			if ($method == 'POST')
+				curl_setopt($ch, CURLOPT_POST, true);
+
+			if ($data)
+				curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+
+			if ($fallowLocation)
+				curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+			curl_setopt($ch, CURLOPT_HTTPHEADER, $this->header);
+
+			curl_setopt($ch, CURLOPT_COOKIEJAR, "cookie.txt");
+			
+			curl_setopt($ch, CURLOPT_COOKIEFILE, "cookie.txt"); //saved cookies
+
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+	        
+	        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+
+	        $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+			$response = curl_exec($ch);
+
+			curl_close($ch);
+
+		} catch (\Exception $e){
+
+            throw $e; 
+            
+		}
+		
 		return $response;
 	}
 

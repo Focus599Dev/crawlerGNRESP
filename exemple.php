@@ -16,7 +16,7 @@ $data = array(
 	"nfe" 			=> '',
 	'cnpj_rem' 		=> '',
 	'inf_comp' 		=> 'Teste de PDF',
-	'data_venc' 	=> '20/09/2018',
+	'data_venc' 	=> '26/09/2018',
 	'data_ref' 		=> '09/2018',
 	'valor_prin'	=> '2,00',
 	'juros'			=> '0,00',
@@ -26,7 +26,7 @@ $data = array(
 );
 
 
-$cw = new Crawler($data);
+$cw = new Focus599Dev\Crawler\Crawler($data);
 
 // Criar conta em https://anti-captcha.com
 $cw->setKeyCaptch('5f9d7d984ed1405536544ddd7b244c6e');
