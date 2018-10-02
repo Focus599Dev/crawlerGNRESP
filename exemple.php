@@ -4,7 +4,7 @@ include ('anticaptcha/imagetotext.php');
 include ('crawler.php');	
 
 $data = array(
-	"cnpj" 			=> '104642230001-63',
+	"cnpj" 			=> '10464223000163',
 	"tiporecolhimento" => '6|4',
 	"uf_fav" 		=> 'SP',
 	"incricao_est" 	=> '',
@@ -26,7 +26,7 @@ $data = array(
 );
 
 
-$cw = new Focus599Dev\Crawler\Crawler($data);
+$cw = new Focus599Dev\CrawlerSP\Crawler($data);
 
 // Criar conta em https://anti-captcha.com
 $cw->setKeyCaptch('5f9d7d984ed1405536544ddd7b244c6e');

@@ -1,0 +1,20 @@
+{
+    "name": "root/crawler-gnresp",
+    "description": "Crawler para pegar o boleto do site GNRE SP",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Marlon O. Barbosa",
+            "email": "marlon.academi@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.6"
+    },
+    "psr-4": {
+        "Focus599Dev\\CrawlerSP\\": "src/",
+        "AntiCaptcha\\": "anticaptcha/"
+    },
+    "minimum-stability":"stable"
+}

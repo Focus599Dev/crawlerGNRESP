@@ -1,6 +1,6 @@
 <?php 
 
-namespace Focus599Dev\Crawler;
+namespace Focus599Dev\CrawlerSP;
 
 use AntiCaptcha\ImageToText;
 use DOMDocument;
@@ -366,6 +366,10 @@ class Crawler{
 
 	private function resolveCaptcha($file){
 		try{
+			
+			if (!$this->keyCaptch)
+				throw new Exception("É necessário setar key do AntiCaptcha");
+				
 			$api = new ImageToText();
 			
 			$api->setVerboseMode(false);
@@ -388,7 +392,9 @@ class Crawler{
 			} else {
 
 			    return $api->getTaskSolution();
+
 			}
+			
 		} catch(\Exception $e){
 			
 			$this->logError($e->getMessage() . ' ' . $e->getLine() . ' ' . $e->getFile());
