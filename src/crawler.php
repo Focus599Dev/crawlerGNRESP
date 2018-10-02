@@ -130,23 +130,11 @@ class Crawler{
 
             	$this->postBoleto = $this->fillPost($this->postBoleto);
 
-				$this->postBoleto['tiporecolhimento'] = $this->data['tiporecolhimento']; 
-
-				$this->postBoleto['Item2.Email.Texto'] = $this->data['email']; 
-
-				$this->postBoleto['Item2.InformacoesComplementares.Texto'] = $this->data['inf_comp']; 
-				
-				$this->postBoleto['Item2.DataDeVencimento.Texto'] = $this->data['data_venc']; 
-
-				$this->postBoleto['Item2.ValorPrincipal.Texto'] = $this->data['valor_prin']; 
-
-				$this->postBoleto['Item2.Juros.Texto'] = $this->data['juros']; 
-
-				$this->postBoleto['Item2.Multa.Texto'] = $this->data['multa']; 
-
-				$this->postBoleto['Item2.AtualizacaoMonetaria.Texto'] = $this->data['atua_monet']; 
-
-				$this->postBoleto['Item2.Total.Texto'] = $this->data['total']; 
+            	foreach ($this->data as $key => $value) {
+            		if ($value){
+            			$this->postBoleto[$key] = $value;
+            		}
+            	}
 
 				$this->header = array(
 				    'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
