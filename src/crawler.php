@@ -2,6 +2,10 @@
 
 namespace Focus599Dev\CrawlerSP;
 
+include_once realpath(__DIR__ . '/../anticaptcha') . '/anticaptcha.php';
+
+include_once realpath(__DIR__ . '/../anticaptcha') . '/imagetotext.php';
+
 use AntiCaptcha\ImageToText;
 use DOMDocument;
 use DomXpath;
@@ -208,7 +212,7 @@ class Crawler{
 						
 					$url = $this->url_base . $url;
 
-					$path  = 'tpm/' . date('YmdHsi') . '.gif';
+					$path  = realpath(__DIR__ . '/../tpm') . '/' . date('YmdHsi') . '.gif';
 
 					$path = $this->getImageFromUrl($url, $path);
 
@@ -353,46 +357,38 @@ class Crawler{
 	}
 
 	private function resolveCaptcha($file){
-		try{
 			
-			if (!$this->keyCaptch)
-				throw new Exception("É necessário setar key do AntiCaptcha");
-				
-			$api = new ImageToText();
+		if (!$this->keyCaptch)
+			throw new \Exception("É necessário setar key do AntiCaptcha");
 			
-			$api->setVerboseMode(false);
+		$api = new ImageToText();
+		
+		$api->setVerboseMode(false);
 
-			$api->setKey($this->keyCaptch);
+		$api->setKey($this->keyCaptch);
 
-			$api->setFile($file);
+		$api->setFile($file);
 
-			if (!$api->createTask()) {
-			    
-			    return false;
-			}
+		if (!$api->createTask()) {
+		    
+		    return false;
+		}
 
-			$taskId = $api->getTaskId();
+		$taskId = $api->getTaskId();
 
-			if (!$api->waitForResult()) {
-			   
-			   return false;
-			
-			} else {
+		if (!$api->waitForResult()) {
+		   
+		   return false;
+		
+		} else {
 
-			    return $api->getTaskSolution();
+		    return $api->getTaskSolution();
 
-			}
-			
-		} catch(\Exception $e){
-			
-			$this->logError($e->getMessage() . ' ' . $e->getLine() . ' ' . $e->getFile());
-
-			return false;
 		}
 	}
 
 	private function logError($message){
-		return file_put_contents('log/log.txt', date('d/m/Y H:i:s') . ' ' . $message . PHP_EOL, FILE_APPEND);
+		return file_put_contents(realpath(__DIR__ . '/../log') . '/' . 'log.txt', date('d/m/Y H:i:s') . ' ' . $message . PHP_EOL, FILE_APPEND);
 	}
 
 	private function fillPost ($post){
@@ -415,7 +411,7 @@ class Crawler{
 		
 		$file = $this->makeRandomString() . '.pdf';
 
-		$folder = 'pdf/';
+		$folder = realpath(__DIR__ . '/../pdf') . '/';
 
 		if ($pdf){
 			return file_put_contents($folder . $file, $pdf);
