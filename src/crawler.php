@@ -413,11 +413,11 @@ class Crawler{
 
 		$folder = realpath(__DIR__ . '/../pdf') . '/';
 
+		$this->filePDF = $folder . $file;
+
 		if ($pdf){
 			return file_put_contents($folder . $file, $pdf);
 		}
-
-		$this->filePDF = $folder . $file;
 
 		return false;
 	}
@@ -451,6 +451,8 @@ class Crawler{
 	public function copyFilePDF($pathTo){
 
 		try {
+
+			var_dump($this->filePDF . 'marlon');
 
 			if (is_file($this->filePDF)){
 				
