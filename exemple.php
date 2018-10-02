@@ -4,25 +4,19 @@ include ('anticaptcha/imagetotext.php');
 include ('crawler.php');	
 
 $data = array(
-	"cnpj" 			=> '10464223000163',
-	"tiporecolhimento" => '6|4',
-	"uf_fav" 		=> 'SP',
-	"incricao_est" 	=> '',
-	"nome" 			=> '',
-	"endereco" 		=> '',
-	"municipio" 	=> '',
-	"cep" 			=> '',
-	"email" 		=> 'marlon.academi@gail.com',
-	"nfe" 			=> '',
-	'cnpj_rem' 		=> '',
-	'inf_comp' 		=> 'Teste de PDF',
-	'data_venc' 	=> '26/09/2018',
-	'data_ref' 		=> '09/2018',
-	'valor_prin'	=> '2,00',
-	'juros'			=> '0,00',
-	'multa' 		=> '0,00',
-	'atua_monet'	=> '0,00',
-	'total'			=> '2,00'
+	'tiporecolhimento' => '6|4',,
+	'Item2.Email.Texto' => '',
+	'Item2.NotaFiscalEletronica.Texto' => '',
+	'Item2.CnpjRemetente.Texto' => '',
+	'Item2.CnpjDestinatario.Texto' => '',
+	'Item2.InformacoesComplementares.Texto' => '',
+	'Item2.DataDeVencimento.Texto' => '',
+	'Item2.Referencia.Texto' => '',
+	'Item2.ValorPrincipal.Texto' => '',
+	'Item2.Juros.Texto' => '',
+	'Item2.Multa.Texto' => '',
+	'Item2.AtualizacaoMonetaria.Texto' => '',
+	'Item2.Total.Texto' => '',
 );
 
 
