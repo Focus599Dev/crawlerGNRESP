@@ -452,8 +452,6 @@ class Crawler{
 
 		try {
 
-			var_dump($this->filePDF . 'marlon');
-
 			if (is_file($this->filePDF)){
 				
 				copy($this->filePDF, $pathTo);
