@@ -59,7 +59,7 @@ class crawlerSPIndividual{
 
 		$this->data = $data;
 
-		$this->file_cookiee = $this->generateRandomString(10) . '.txt';
+		$this->file_cookiee = realpath(__DIR__ . '/../tmp/') . $this->generateRandomString(10) . '.txt';
 
 		if (session_status() == PHP_SESSION_NONE)
             session_start();
@@ -237,7 +237,7 @@ class crawlerSPIndividual{
 			
 			curl_setopt($ch, CURLOPT_COOKIEFILE, $this->file_cookiee); //saved cookies
 
-			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
 	        
 	        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
 
