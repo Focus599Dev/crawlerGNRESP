@@ -91,6 +91,25 @@ class crawlerDARE{
 
 			$dataCNPJ = json_decode($dataCNPJ);
 
+			if (!$dataCNPJ->inscricaoEstadual){
+
+				$dataCNPJ->inscricaoEstadual = "";
+
+				$dataCNPJ->cpf = $this->data['cnpj'];
+
+				$dataCNPJ->endereco = $this->data['endereco'];
+				
+				$dataCNPJ->razaoSocial = $this->data['razao'];
+				
+				$dataCNPJ->telefone = $this->data['telefone'];
+				
+				$dataCNPJ->cidade = $this->data['municipio'];
+				
+				$dataCNPJ->uf = $this->data['uf_emp'];
+
+				$dataCNPJ->cpr = '0000';
+			}
+
 			$postImpostos = array(
 				'cpr' => $dataCNPJ->cpr,
 				'receita' => array(
@@ -127,7 +146,7 @@ class crawlerDARE{
 			);
 
 			$dataImpostos = $this->execCurl($this->url_base . '/btnCalcular_Click/', 'POST', $postImpostos);	
-
+			
 			$dataImpostos = json_decode($dataImpostos);
 
 			if ($dataImpostos->erro->estaOk){
@@ -159,9 +178,14 @@ class crawlerDARE{
 					"valorTotal" => round($dataImpostos->valorTotal, 2),
 				);
 
+				var_dump($postPDF);
+
+
 				$postPDF = json_encode($postPDF);
 
 				$postPDF = str_replace('\/', '/', $postPDF);
+
+				var_dump($postPDF);
 
 				$this->header = array(
 					'Accept: */*',
@@ -185,6 +209,8 @@ class crawlerDARE{
 				);
 
 				$dataPDF = $this->execCurl($this->url_base . '/btnGerar_Click/', 'POST', $postPDF);	
+
+				var_dump($dataPDF);
 
 				$dataPDF = json_decode($dataPDF);
 
