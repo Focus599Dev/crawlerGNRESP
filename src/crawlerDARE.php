@@ -166,7 +166,7 @@ class crawlerDARE{
 					"Receita" => array(
 						"codigoServicoDARE" => (Int)$this->data['receita'],
 						"CamposEspecificos" => array(
-							array("valor" => ""),
+							array("valor" => $this->data['nf'] != '' ? $this->data['nf'] : "" ),
 							array("valor" => ""),
 							array("valor" => ""),
 						),
@@ -178,14 +178,9 @@ class crawlerDARE{
 					"valorTotal" => round($dataImpostos->valorTotal, 2),
 				);
 
-				var_dump($postPDF);
-
-
 				$postPDF = json_encode($postPDF);
 
 				$postPDF = str_replace('\/', '/', $postPDF);
-
-				var_dump($postPDF);
 
 				$this->header = array(
 					'Accept: */*',
@@ -209,8 +204,6 @@ class crawlerDARE{
 				);
 
 				$dataPDF = $this->execCurl($this->url_base . '/btnGerar_Click/', 'POST', $postPDF);	
-
-				var_dump($dataPDF);
 
 				$dataPDF = json_decode($dataPDF);
 
