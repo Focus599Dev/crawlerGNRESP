@@ -86,16 +86,19 @@ class crawlerDARE{
 		);
 
 		$dataCNPJ = $this->execCurl($this->url_base . '/btnConsultar_Click/' . $this->data['cnpj'], 'POST', array());	
+		
+		// if ($dataCNPJ){
 
-		if ($dataCNPJ){
-
-			$dataCNPJ = json_decode($dataCNPJ);
+			// $dataCNPJ = json_decode($dataCNPJ);
+			$dataCNPJ = new \stdClass();
 
 			if (!$dataCNPJ->inscricaoEstadual){
 
-				$dataCNPJ->inscricaoEstadual = "";
+				$dataCNPJ->inscricaoEstadual = $this->data['incricao_estadual'];
 
 				$dataCNPJ->cpf = $this->data['cnpj'];
+
+				$dataCNPJ->cnpj = $this->data['cnpj'];
 
 				$dataCNPJ->endereco = $this->data['endereco'];
 				
@@ -146,7 +149,7 @@ class crawlerDARE{
 			);
 
 			$dataImpostos = $this->execCurl($this->url_base . '/btnCalcular_Click/', 'POST', $postImpostos);	
-			
+
 			$dataImpostos = json_decode($dataImpostos);
 
 			if ($dataImpostos->erro->estaOk){
@@ -166,7 +169,7 @@ class crawlerDARE{
 					"Receita" => array(
 						"codigoServicoDARE" => (Int)$this->data['receita'],
 						"CamposEspecificos" => array(
-							array("valor" => $this->data['nf'] != '' ? $this->data['nf'] : "" ),
+							array("valor" => ""),
 							array("valor" => ""),
 							array("valor" => ""),
 						),
@@ -205,6 +208,9 @@ class crawlerDARE{
 
 				$dataPDF = $this->execCurl($this->url_base . '/btnGerar_Click/', 'POST', $postPDF);	
 
+				var_dump($dataPDF);
+				var_dump(json_decode($postPDF));
+
 				$dataPDF = json_decode($dataPDF);
 
 				$this->data = $dataPDF;
@@ -232,7 +238,7 @@ class crawlerDARE{
 			
 				}
 			}
-		}
+		// }
 
 		return false;
 	}
