@@ -248,14 +248,15 @@ class crawlerDARE{
 	}
 
 	private function savePDF($pdf){
-		
-		var_dump($pdf);
-		
+
 		$file = $this->makeRandomString() . '.pdf';
 
-		$folder = realpath(__DIR__ . '/../pdf') . '/';
+		$folder = realpath(__DIR__ . '/../../../../public/tmp') . '/';
 
 		$this->filePDF = $folder . $file;
+
+		var_dump($folder . $file);
+		var_dump($pdf);
 
 		if ($pdf){
 			return file_put_contents($folder . $file, $pdf);
@@ -289,8 +290,7 @@ class crawlerDARE{
 	public function copyFilePDF($pathTo){
 
 		try {
-			var_dump($pathTo);
-			var_dump($this->filePDF);
+
 			if (is_file($this->filePDF)){
 				
 				copy($this->filePDF, $pathTo);
