@@ -208,9 +208,6 @@ class crawlerDARE{
 
 				$dataPDF = $this->execCurl($this->url_base . '/btnGerar_Click/', 'POST', $postPDF);	
 
-				var_dump($dataPDF);
-				var_dump(json_decode($postPDF));
-
 				$dataPDF = json_decode($dataPDF);
 
 				$this->data = $dataPDF;
@@ -254,9 +251,6 @@ class crawlerDARE{
 		$folder = realpath(__DIR__ . '/../../../../public/tmp') . '/';
 
 		$this->filePDF = $folder . $file;
-
-		var_dump($folder . $file);
-		var_dump($pdf);
 
 		if ($pdf){
 			return file_put_contents($folder . $file, $pdf);
