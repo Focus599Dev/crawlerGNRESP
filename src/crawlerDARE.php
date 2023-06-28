@@ -52,7 +52,7 @@ class crawlerDARE{
 
 		$this->data = $data;
 
-		$this->file_cookiee = realpath(__DIR__ . '/../tmp/') . $this->makeRandomString(10) . '.txt';
+		$this->file_cookiee = realpath(__DIR__ . '/../tpm/') . $this->makeRandomString(10) . '.txt';
 
 		if (session_status() == PHP_SESSION_NONE)
             session_start();
@@ -249,6 +249,8 @@ class crawlerDARE{
 
 	private function savePDF($pdf){
 		
+		var_dump($pdf);
+		
 		$file = $this->makeRandomString() . '.pdf';
 
 		$folder = realpath(__DIR__ . '/../pdf') . '/';
@@ -287,7 +289,8 @@ class crawlerDARE{
 	public function copyFilePDF($pathTo){
 
 		try {
-
+			var_dump($pathTo);
+			var_dump($this->filePDF);
 			if (is_file($this->filePDF)){
 				
 				copy($this->filePDF, $pathTo);
